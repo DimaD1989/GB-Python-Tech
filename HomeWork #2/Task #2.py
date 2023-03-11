@@ -2,15 +2,14 @@ from fractions import Fraction
 
 
 class SelfFraction:
-    def __init__(self, fraction: str):
-        fraction = fraction.split('/')
-        if len(fraction) != 2 and isinstance(fraction[0], int) and isinstance(fraction[1], int):
+    def __init__(self, numerator: int, denominator: int):
+        if not isinstance(numerator, int) and not isinstance(denominator, int):
             raise ValueError
-        elif fraction[1] == 0:
+        elif denominator == 0:
             raise ZeroDivisionError
         else:
-            self.num = int(fraction[0])
-            self.den = int(fraction[1])
+            self.num = numerator
+            self.den = denominator
             num_devs = SelfFraction.general_div(self.num)
             den_devs = SelfFraction.general_div(self.den)
             main_dev = max(set(num_devs).intersection(den_devs))
@@ -21,12 +20,12 @@ class SelfFraction:
     def __add__(self, other):
         main_den = self.den * other.den
         main_num = self.num * other.den + other.num * self.den
-        return SelfFraction(f'{main_num}/{main_den}')
+        return SelfFraction(main_num, main_den)
 
     def __mul__(self, other):
         main_num = self.num * other.num
         main_den = self.den * other.den
-        return SelfFraction(f'{main_num}/{main_den}')
+        return SelfFraction(main_num, main_den)
 
     @staticmethod
     def general_div(number: int):
@@ -40,11 +39,16 @@ class SelfFraction:
         return f'{self.num}/{self.den}'
 
 
-fract_1 = SelfFraction('7/8')
-fract_2 = SelfFraction('1/2')
+first_fract = input('Введите первую дробь формата "a/b": ').split('/')
+second_fract = input('Введите вторую дробь формата "a/b": ').split('/')
 
-print(f'Свой класс {fract_1 + fract_2}')
-print(f'Проверка {Fraction(3 / 4 + 1 / 2)}')
+self_fract_1 = SelfFraction(int(first_fract[0]), int(first_fract[1]))
+self_fract_2 = SelfFraction(int(second_fract[0]), int(second_fract[1]))
+original_fract_1 = SelfFraction(int(first_fract[0]), int(first_fract[1]))
+original_fract_2 = SelfFraction(int(second_fract[0]), int(second_fract[1]))
 
-print(f'Свой класс {fract_1 * fract_2}')
-print(f'Проверка {Fraction(3 / 4 * 1 / 2)}')
+print(f'Свой класс {self_fract_1 + self_fract_2}')
+print(f'Проверка {original_fract_1 + original_fract_2}')
+
+print(f'Свой класс {self_fract_1 * self_fract_2}')
+print(f'Проверка {original_fract_1 * original_fract_2}')
