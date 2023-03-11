@@ -8,14 +8,9 @@ class SelfFraction:
         elif denominator == 0:
             raise ZeroDivisionError
         else:
-            self.num = numerator
-            self.den = denominator
-            num_devs = SelfFraction.general_div(self.num)
-            den_devs = SelfFraction.general_div(self.den)
-            main_dev = max(set(num_devs).intersection(den_devs))
-            if main_dev:
-                self.num //= main_dev
-                self.den //= main_dev
+            nod = SelfFraction.check_nod(numerator, denominator)
+            self.num = numerator // nod
+            self.den = denominator // nod
 
     def __add__(self, other):
         main_den = self.den * other.den
@@ -28,12 +23,12 @@ class SelfFraction:
         return SelfFraction(main_num, main_den)
 
     @staticmethod
-    def general_div(number: int):
-        devs = [1]
-        for i in range(1, number):
-            if number % i == 0:
-                devs.append(i)
-        return devs
+    def check_nod(num: int, den: int) -> int:
+        nod = 1
+        for i in range(1, max(num, den)//2 + 1):
+            if num % i == 0 and den % i == 0:
+                nod = i
+        return nod
 
     def __str__(self):
         return f'{self.num}/{self.den}'
