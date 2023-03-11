@@ -39,8 +39,8 @@ second_fract = input('Введите вторую дробь формата "a/b
 
 self_fract_1 = SelfFraction(int(first_fract[0]), int(first_fract[1]))
 self_fract_2 = SelfFraction(int(second_fract[0]), int(second_fract[1]))
-original_fract_1 = SelfFraction(int(first_fract[0]), int(first_fract[1]))
-original_fract_2 = SelfFraction(int(second_fract[0]), int(second_fract[1]))
+original_fract_1 = Fraction(int(first_fract[0]), int(first_fract[1]))
+original_fract_2 = Fraction(int(second_fract[0]), int(second_fract[1]))
 
 print(f'Свой класс {self_fract_1 + self_fract_2}')
 print(f'Проверка {original_fract_1 + original_fract_2}')
