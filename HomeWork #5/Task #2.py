@@ -1,9 +1,9 @@
 from pprint import pprint
 
-employee_list = [('Кирилл Панфилов', 100000, '2.5%'),
-                 ('Андрей Беляев', 150000, '1.5%'),
-                 ('Виталий Кузьмин', 1000, '5%')]
+name_employee = ('Кирилл Панфилов', 'Андрей Беляев', 'Виталий Кузьмин')
+salary = (100000, 150000, 5000)
+bonus = ('2.5%', '1.5%', '5%')
 
-bonus = {name: salary + salary * (float(bonus[:-1]) / 100) for name, salary, bonus in employee_list}
+bonus = {name_employee[i]: salary[i] + salary[i] * (float(bonus[i][:-1]) / 100) for i in range(len(name_employee))}
 
 pprint(bonus)
