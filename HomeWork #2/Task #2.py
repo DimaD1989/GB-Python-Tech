@@ -25,7 +25,7 @@ class SelfFraction:
     @staticmethod
     def check_nod(num: int, den: int) -> int:
         nod = 1
-        for i in range(1, max(num, den)//2 + 1):
+        for i in range(1, max(num, den) // 2 + 1):
             if num % i == 0 and den % i == 0:
                 nod = i
         return nod
