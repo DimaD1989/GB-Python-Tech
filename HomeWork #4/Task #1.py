@@ -18,7 +18,6 @@ class Matrix:
         return new_matrix
 
     def transposition(self):
-        # self.matrix.clear()
         for column in range(self.columns):
             new_row = []
             for row in range(self.rows):
